@@ -5,13 +5,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var keypress = require("keypress");
-
+var five = require("johnny-five");
 
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var board = new five.Board();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,6 +35,10 @@ app.use('/users', users);
 
 keypress(process.stdin);
 
+board.on("ready", function() {
+
+  console.log("Carrito ready... ");
+
    // listen for the "keypress" event
   process.stdin.on('keypress', function (ch, key) {
     if (key && key.ctrl && key.name == 'c') {
@@ -43,31 +48,31 @@ keypress(process.stdin);
     if ( key ){
       switch ( key.name ){
         case 'up':
-          console.log(' => Up: ');
+          console.log(' => Adelante: ');
           break;
         case 'down':
-          console.log(' => Rev: ');
+          console.log(' => Atras: ');
           break;
         case 'left':
-          console.log(' => Left: ');
+          console.log(' => Izquierda: ');
           break;
         case 'right':
-          console.log('right');
+          console.log(' => Derecha');
           break;
         case 's':
-          console.log(' => Stoping...');
+          console.log(' => Detener...');
           break;
-        default:
-          console.log('Ignoring key: ' + key.name);
       }
     }
 
   });
+});
 
-  process.stdin.setRawMode(true);
-  process.stdin.resume();
+process.stdin.setRawMode(true);
+process.stdin.resume();
 
 /***********************************************************************************/
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
