@@ -32,9 +32,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+/***************************** Socket.io *****************************************/
+app.io.on('connection', function(socketInfo){
+    console.log('Un cliente nuevo con ID =>', socketInfo.id);
+});
 
-
-/**********************************************************************************/
+/****************************** Keypress ******************************************/
 
 keypress(process.stdin);
 
