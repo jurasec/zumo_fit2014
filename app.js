@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require('express.io');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -12,6 +12,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+app.http().io();
 var board = new five.Board();
 
 var speed = 150;
