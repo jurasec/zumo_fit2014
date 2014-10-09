@@ -14,6 +14,8 @@ var users = require('./routes/users');
 var app = express();
 var board = new five.Board();
 
+var speed = 150;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -38,6 +40,9 @@ keypress(process.stdin);
 board.on("ready", function() {
 
   console.log("Carrito ready... ");
+  // https://github.com/rwaldron/johnny-five/blob/master/docs/motor-directional.md
+  motor1 = new five.Motor([10, 8]);
+  motor2 = new five.Motor([9, 7]);
 
    // listen for the "keypress" event
   process.stdin.on('keypress', function (ch, key) {
@@ -48,20 +53,30 @@ board.on("ready", function() {
     if ( key ){
       switch ( key.name ){
         case 'up':
-          console.log(' => Adelante: ');
-          break;
+            console.log(' => Adelante: ');
+            motor1.rev( speed );
+            motor2.rev( speed );
+            break;
         case 'down':
-          console.log(' => Atras: ');
-          break;
+            console.log(' => Atras: ');
+            motor1.fwd( speed );
+            motor2.fwd( speed );
+            break;
         case 'left':
-          console.log(' => Izquierda: ');
-          break;
+            console.log(' => Izquierda: ');
+            motor1.fwd( speed * 0.8 );
+            motor2.rev( speed * 0.8 );
+            break;
         case 'right':
-          console.log(' => Derecha');
-          break;
+            console.log(' => Derecha');
+            motor1.rev( speed * 0.8 );
+            motor2.fwd( speed * 0.8 );
+            break;
         case 's':
-          console.log(' => Detener...');
-          break;
+            console.log(' => Detener...');
+            motor1.stop();
+            motor2.stop();
+            break;
       }
     }
 
