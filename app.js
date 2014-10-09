@@ -4,6 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var keypress = require("keypress");
+
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -24,6 +27,47 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+
+
+/**********************************************************************************/
+
+keypress(process.stdin);
+
+   // listen for the "keypress" event
+  process.stdin.on('keypress', function (ch, key) {
+    if (key && key.ctrl && key.name == 'c') {
+      process.exit(0);
+    }
+
+    if ( key ){
+      switch ( key.name ){
+        case 'up':
+          console.log(' => Up: ');
+          break;
+        case 'down':
+          console.log(' => Rev: ');
+          break;
+        case 'left':
+          console.log(' => Left: ');
+          break;
+        case 'right':
+          console.log('right');
+          break;
+        case 's':
+          console.log(' => Stoping...');
+          break;
+        default:
+          console.log('Ignoring key: ' + key.name);
+      }
+    }
+
+  });
+
+  process.stdin.setRawMode(true);
+  process.stdin.resume();
+
+/***********************************************************************************/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
