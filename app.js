@@ -37,6 +37,14 @@ app.io.on('connection', function(socketInfo){
     console.log('Un cliente nuevo con ID =>', socketInfo.id);
 });
 
+app.io.route('hi server', function(req){
+  console.log('un cliente dice hi con ID => ', req.socket.id);
+  // console.log(req.socket.id);
+  req.io.emit('hi', {
+    message: req.socket.id
+  });
+});
+
 /****************************** Keypress ******************************************/
 
 keypress(process.stdin);
