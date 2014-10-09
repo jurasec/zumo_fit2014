@@ -56,47 +56,74 @@ board.on("ready", function() {
   motor1 = new five.Motor([10, 8]);
   motor2 = new five.Motor([9, 7]);
 
-   // listen for the "keypress" event
-  process.stdin.on('keypress', function (ch, key) {
-    if (key && key.ctrl && key.name == 'c') {
-      process.exit(0);
-    }
 
-    if ( key ){
-      switch ( key.name ){
-        case 'up':
-            console.log(' => Adelante: ');
-            motor1.rev( speed );
-            motor2.rev( speed );
-            break;
-        case 'down':
-            console.log(' => Atras: ');
-            motor1.fwd( speed );
-            motor2.fwd( speed );
-            break;
-        case 'left':
-            console.log(' => Izquierda: ');
-            motor1.fwd( speed * 0.8 );
-            motor2.rev( speed * 0.8 );
-            break;
-        case 'right':
-            console.log(' => Derecha');
-            motor1.rev( speed * 0.8 );
-            motor2.fwd( speed * 0.8 );
-            break;
-        case 's':
-            console.log(' => Detener...');
-            motor1.stop();
-            motor2.stop();
-            break;
-      }
-    }
-
+  app.io.route('fwd', function(req){
+    console.log(' => Adelante: ');
+    motor1.rev( speed );
+    motor2.rev( speed );
   });
+  app.io.route('rev', function(req){
+    console.log(' => Atras: ');
+    motor1.fwd( speed );
+    motor2.fwd( speed );
+  });
+  app.io.route('left', function(req){
+    console.log(' => Izquierda: ');
+    motor1.fwd( speed * 0.5 );
+    motor2.rev( speed * 0.5 );
+  });
+  app.io.route('right', function(req){
+    console.log(' => Derecha');
+    motor1.rev( speed * 0.5 );
+    motor2.fwd( speed * 0.5 );
+  });
+  app.io.route('stop', function(req){
+    console.log(' => Detener...');
+    motor1.stop();
+    motor2.stop();
+  });
+
+  // listen for the "keypress" event
+//   process.stdin.on('keypress', function (ch, key) {
+//     if (key && key.ctrl && key.name == 'c') {
+//       process.exit(0);
+//     }
+
+//     if ( key ){
+//       switch ( key.name ){
+//         case 'up':
+//             console.log(' => Adelante: ');
+//             motor1.rev( speed );
+//             motor2.rev( speed );
+//             break;
+//         case 'down':
+//             console.log(' => Atras: ');
+//             motor1.fwd( speed );
+//             motor2.fwd( speed );
+//             break;
+//         case 'left':
+//             console.log(' => Izquierda: ');
+//             motor1.fwd( speed * 0.8 );
+//             motor2.rev( speed * 0.8 );
+//             break;
+//         case 'right':
+//             console.log(' => Derecha');
+//             motor1.rev( speed * 0.8 );
+//             motor2.fwd( speed * 0.8 );
+//             break;
+//         case 's':
+//             console.log(' => Detener...');
+//             motor1.stop();
+//             motor2.stop();
+//             break;
+//       }
+//     }
+
+//   });
 });
 
-process.stdin.setRawMode(true);
-process.stdin.resume();
+// process.stdin.setRawMode(true);
+// process.stdin.resume();
 
 /***********************************************************************************/
 
