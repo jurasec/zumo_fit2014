@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<html lang="en"></html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>:: Carrito ::</title>
+  <!--Bootstrap -->
+  <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="span7 row-fluid">
+      <div class="centering text-center">
+        <h1>Go!</h1>
+        <button id="up-btn" type="button" class="btn btn-primary btn-lg icon-arrow-up"></button><br><br>
+        <button id="left-btn" type="button" class="btn btn-primary btn-lg icon-arrow-left"></button>
+        <button id="stop-btn" type="button" class="btn btn-danger btn-lg icon-close"></button>
+        <button id="right-btn" type="button" class="btn btn-primary btn-lg icon-arrow-right"></button><br><br>
+        <button id="down-btn" type="button" class="btn btn-primary btn-lg icon-arrow-down"></button>
+      </div>
+    </div>
+  </div>
+  <!--jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="javascripts/jquery.min.js"></script>
+  <script src="javascripts/bootstrap.min.js"></script>
+  <script src="javascripts/socketcom.js"></script>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+</body>
